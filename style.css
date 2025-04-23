@@ -1,0 +1,39 @@
+
+body{
+    background-image: url(wp13105118-jujutsu-kaisen-2560x1440-wallpapers.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+#header{
+    text-align: center;
+    background-color: blanchedalmond;
+    color: black;
+    padding: 5px;
+    border-radius: 50px;
+    
+}
+#search{
+    margin: 15px;
+    text-align: center;
+    
+}
+#todo-list{
+    width: 50px;
+}
+#input{
+    width: 600px;
+    height: 50px;
+    border-radius: 15px;
+    text-align: center;
+    
+}
+#button{
+    width: 100px;
+    height: 50px;
+
+}
+#listcontainer{
+    color: white;
+}
