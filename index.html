@@ -2,37 +2,99 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List ✔️</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffa500" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+
 </head>
 
 <body>
-    <div id="header">
-        <h1>Todo List Website - Manage Your Tasks 🎶</h1>
-    </div>
-    <div id="search">
-        <input type="text" id="input" placeholder="Add Your List...."> <button onclick="add()" id="button">add</button>
-        <div id="listcontainer">
-            <!-- List items will be added here -->
-        </div>
-    </div>
+    <header id="header">
+        <h1 id="h1">Todo List Website - Manage Your Tasks 🎶</h1>
+    </header>
+
+    <main>
+        <section id="search">
+            <input type="text" id="input" placeholder="Add your task..." />
+            <button onclick="add()" id="button">Add</button>
+        </section>
+
+        <section id="listcontainer">
+            <!-- Task items will appear here -->
+        </section>
+    </main>
 
     <script>
-        var input = document.getElementById("input")
-        var list = document.getElementById("listcontainer")
+        const input = document.getElementById("input");
+        const list = document.getElementById("listcontainer");
+
+        // Load saved tasks on page load
+        window.onload = () => {
+            const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            savedTasks.forEach(task => renderTask(task.text, task.done));
+        };
 
         function add() {
-            var lii = document.createElement("h1")
-            lii.innerHTML = input.value + " " + "<button onclick='deleteitem(event)'>Delete</button>"
-            list.prepend(lii)
+            const taskText = input.value.trim();
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            renderTask(taskText, false);
+            saveTasks();
+            input.value = "";
         }
 
-        function deleteitem(event) {
-            event.target.parentElement.remove()
+        function renderTask(text, done) {
+            const task = document.createElement("div");
+            task.className = "task";
+
+            const taskContent = document.createElement("span");
+            taskContent.textContent = text;
+            taskContent.className = "task-text";
+            if (done) taskContent.classList.add("done");
+
+            taskContent.onclick = () => {
+                taskContent.classList.toggle("done");
+                saveTasks();
+            };
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.className = "delete-btn";
+            deleteBtn.onclick = () => {
+                task.remove();
+                saveTasks();
+            };
+
+            task.appendChild(taskContent);
+            task.appendChild(deleteBtn);
+            list.prepend(task);
         }
 
+        function saveTasks() {
+            const tasks = [];
+            const taskElements = document.querySelectorAll(".task");
+
+            taskElements.forEach(taskEl => {
+                const text = taskEl.querySelector(".task-text").textContent;
+                const done = taskEl.querySelector(".task-text").classList.contains("done");
+                tasks.push({ text, done });
+            });
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.error('Service Worker Failed', err));
+        }
     </script>
 
 </body>

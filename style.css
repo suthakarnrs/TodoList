@@ -1,39 +1,107 @@
-
-body{
-    background-image: url(wp13105118-jujutsu-kaisen-2560x1440-wallpapers.jpg);
+/* General styles */
+body {
+    background-image: url("wp13105118-jujutsu-kaisen-2560x1440-wallpapers.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
 }
-#header{
+
+/* Header */
+#header {
     text-align: center;
-    background-color: blanchedalmond;
+    background-color: rgba(255, 235, 205, 0.9);
     color: black;
-    padding: 5px;
-    border-radius: 50px;
-    
+    padding: 20px 10px;
+    border-radius: 20px;
+    margin: 10px;
 }
-#search{
-    margin: 15px;
-    text-align: center;
-    
-}
-#todo-list{
-    width: 50px;
-}
-#input{
-    width: 600px;
-    height: 50px;
-    border-radius: 15px;
-    text-align: center;
-    
-}
-#button{
-    width: 100px;
-    height: 50px;
 
+/* Search/input section */
+#search {
+    text-align: center;
+    margin: 20px;
 }
-#listcontainer{
+
+#input {
+    width: 60%;
+    max-width: 500px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+#button {
+    height: 45px;
+    padding: 0 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#button:hover {
+    background-color: #ff8c00;
+}
+
+/* Task list */
+#listcontainer {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.task-text.done {
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
     color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 630px) {
+    #input {
+        width: 70%;
+    }
+
+    #button {
+        width: auto;
+    }
+
+    #h1 {
+        font-size: 20px;
+    }
 }
