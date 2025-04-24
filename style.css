@@ -1,6 +1,6 @@
 /* General styles */
 body {
-    background-image: url("wp13105118-jujutsu-kaisen-2560x1440-wallpapers.jpg");
+    background-image: url("bg.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -13,7 +13,7 @@ body {
 /* Header */
 #header {
     text-align: center;
-    background-color: rgba(255, 235, 205, 0.9);
+    background-color: whitesmoke;
     color: black;
     padding: 20px 10px;
     border-radius: 20px;
